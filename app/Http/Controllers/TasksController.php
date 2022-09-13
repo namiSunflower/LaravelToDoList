@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\models\Task;
 
 class TasksController extends Controller
 {
@@ -16,7 +17,7 @@ class TasksController extends Controller
         //
         $tasks = Task::all();
         return view('tasks.index')->with('tasks', $tasks);
-        
+
     }
 
     /**
@@ -27,6 +28,7 @@ class TasksController extends Controller
     public function create()
     {
         //
+        return view('tasks.create');
     }
 
     /**
@@ -38,6 +40,12 @@ class TasksController extends Controller
     public function store(Request $request)
     {
         //
+        $newTask = new Task;
+        $newTask->taskTitle = $request->taskTitle;
+        $newTask->description = $request->description;
+        $newTask->date = $request->date;
+        $newTask->save();
+        return redirect()->route('tasks.index');
     }
 
     /**
@@ -48,7 +56,8 @@ class TasksController extends Controller
      */
     public function show($id)
     {
-        //
+        $taskInfo = Task::find($id);
+        return view('tasks.show')->with('taskInfo', $taskInfo);
     }
 
     /**
@@ -59,7 +68,8 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
-        //
+        $task = Task::find($id);
+        return view('tasks.edit')->with('task', $task);
     }
 
     /**
@@ -72,6 +82,11 @@ class TasksController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $task->taskTitle = $request->taskTitle;
+        $task->description = $request->description;
+        $task->date = $request->date;
+        $task->save();
+        return redirect()->route('tasks.index');
     }
 
     /**
