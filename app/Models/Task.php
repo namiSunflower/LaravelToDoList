@@ -19,4 +19,5 @@ class Task extends Model
         'description',
         'date'
     ];
+    // protected $hidden
 }

@@ -7,10 +7,16 @@
                 @csrf
                 <label for ="newTask">Task Title</label><br>
                 <input type="text" name = "taskTitle" id="taskTitle"><br>
+                @if ($errors->has('taskTitle'))
+                    <span class="text-danger">{{ $errors->first('taskTitle') }}</span><br>
+                @endif
                 <label for ="description">description</label><br>
                 <textarea id="description" name="description" rows="4" cols="50"></textarea><br>
                 <label for ="newTask">date</label><br>
-                <input id="date" name="date"></input><br><br>
+                <input id="date" name="date"><br>
+                @if ($errors->has('date'))
+                <span class="text-danger">{{ $errors->first('date') }}</span><br><br>
+                @endif
                 <input type="submit">
             </form>
         </div>

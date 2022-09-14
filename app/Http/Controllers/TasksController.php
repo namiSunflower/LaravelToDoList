@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\models\Task;
+use App\Http\Requests\TaskCreateRequest;
+use App\Http\Requests\TaskUpdateRequest;
 
 class TasksController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('auth', ['except' => ['index', 'show']]);
+    // }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,11 +22,17 @@ class TasksController extends Controller
     public function index()
     {
         $name = auth()->user()->name;
-        $id = auth()->user()->id;
         //Display all user's tasks
-        $tasks = Task::all();
+        $user_id = auth()->user()->id;
+        // $task_user_id = Task::find($user_id);
+        // $tasks = Task::all();
+
+        //Only show tasks by user who is logged in
+        $tasks = Task::where('user_id', $user_id)->get();
+
         //chaining them for now
-        return view('tasks.index')->with('tasks', $tasks)->with('name', $name);
+        // return view('tasks.index')->with('tasks', $tasks)->with('name', $name);
+        return view('tasks.index')->with(compact(['name', 'tasks']));
     }
 
     /**
@@ -39,18 +52,19 @@ class TasksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TaskCreateRequest $request)
     {
         //Create a new task
-        $newTask = new Task;
-        $newTask->taskTitle = $request->taskTitle;
-        $newTask->description = $request->description;
-        $newTask->date = $request->date;
-        $newTask->user_id = auth()->user()->id;
+        $task = new Task;
+        $task->taskTitle = $request->input('taskTitle');
+        $task->description = $request->input('description');
+        $task->date = $request->input('date');
+        $task->user_id = auth()->user()->id;
         // $post->user_id = auth()->user()->id;
-        $newTask->save();
+        $task->save();
         // return redirect()->route('tasks.index');
-        return redirect('/tasks')->with('success', 'Task Created');
+        // return redirect('tasks')->with('success', 'Task Created');
+        return redirect()->route('tasks.index', $task)->with('success', 'Task created!');
     }
 
     /**
@@ -59,10 +73,10 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Task $task)
     {
-        $taskInfo = Task::fi;
-        return view('tasks.show')->with('taskInfo', $taskInfo);
+        // $taskInfo = Task::find($id);
+        return view('tasks.show')->with(compact(['task']));
     }
 
     /**
@@ -71,10 +85,11 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Task $task)
     {
-        $task = Task::find($id);
-        return view('tasks.edit')->with('task', $task);
+        // $task = Task::find($id);
+        // return $task;
+        return view('tasks.edit')->with(compact(['task']));
     }
 
     /**
@@ -84,15 +99,16 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TaskUpdateRequest $request, Task $task)
     {
         //
-        $task = Task::find($id);
-        $task->taskTitle = $request->taskTitle;
-        $task->description = $request->description;
-        $task->date = $request->date;
+        $task->taskTitle = $request->input('taskTitle');
+        $task->description = $request->input('description');
+        $task->date= $request->input('date');
+        // $task->date = $request->date;
         $task->save();
-        return redirect('/tasks')->with('success', 'Stock updated.');
+        // return redirect('tasks')->with('success', 'Stock updated.');
+        return redirect()->route('tasks.index', $task)->with('success', 'Task updated!');
     }
 
     /**
@@ -101,12 +117,12 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Task $task)
     {
         //
-        $task = Task::find($id);
         $task->delete();
-        return redirect('/tasks')->with('success', 'Task removed.'); 
+        // return redirect('/tasks')->with('success', 'Task removed.'); 
+        return redirect()->route('tasks.index', $task)->with('success', 'Task removed!');
     }
 
 }

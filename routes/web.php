@@ -28,20 +28,34 @@ Route::get('/tasks', [TasksController::class, 'index'])->name('home');
 //     return view('pages.todo');
 // });
 
+//show all tasks
+Route::get('/tasks', [TasksController::class, 'index']);
+//show one task by id
+Route::group(['prefix' => '/tasks', 'as' => 'tasks.'], function () {
+    Route::get('/', [TasksController::class, 'index'])->name('index');
+    Route::get('/create', [TasksController::class, 'create'])->name('create');
+    Route::get('/{task}', [TasksController::class, 'show'])->name('show');
+    Route::get('/{task}/edit', [TasksController::class, 'edit'])->name('edit');
+    Route::post('/', [TasksController::class, 'store'])->name('store');
+    Route::put('/{task}', [TasksController::class, 'update'])->name('update');
+    Route::delete('/{task}', [TasksController::class, 'destroy'])->name('destroy');
+});
 
-// Route::get('/tasks', [TasksController::class, 'index']);
-// //show all tasks
-// Route::get('/getTasks', [TasksController::class, 'show']);
-// //create task
-// Route::post('/getTasks', [TasksController::class, 'create']);
+// Route::get('/tasks/{id}', [TasksController::class, 'show']);
+//task creation screen
+// Route::get('/tasks/create', [TasksController::class, 'create']);
+//submitting newly created task
+// Route::post('/tasks/{id}', [TasksController::class, 'store']);
 // //update task
-// Route::put('/putTask', [TasksController::class, 'update']);
+// Route::put('/tasks/{id}', [TasksController::class, 'update']);
 // //delete task
-// Route::get('/getTasks', [TasksController::class, 'show']);
+// Route::delete('/tasks/{id}', [TasksController::class, 'delete']);
+// //edit task screen
+// Route::get('/tasks/{id}/edit', [TasksController::class, 'edit']);
 
 
 //Only logged in users can access routes
-Route::resource('tasks', TasksController::class)->middleware('auth');
+// Route::resource('tasks', TasksController::class);
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
