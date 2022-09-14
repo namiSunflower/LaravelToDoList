@@ -20,15 +20,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/tasks', [TasksController::class, 'index'])->name('home');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+//I didn't delete the comments just for learning reference later on
 // Route::get('/todo', function(){
 //     return view('pages.todo');
 // });
+
 
 // Route::get('/tasks', [TasksController::class, 'index']);
 // //show all tasks
@@ -40,4 +39,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // //delete task
 // Route::get('/getTasks', [TasksController::class, 'show']);
 
-Route::resource('tasks', TasksController::class);
+
+//Only logged in users can access routes
+Route::resource('tasks', TasksController::class)->middleware('auth');
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

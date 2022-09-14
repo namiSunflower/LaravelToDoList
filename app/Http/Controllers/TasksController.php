@@ -14,10 +14,12 @@ class TasksController extends Controller
      */
     public function index()
     {
-        //
+        $name = auth()->user()->name;
+        $id = auth()->user()->id;
+        //Display all user's tasks
         $tasks = Task::all();
-        return view('tasks.index')->with('tasks', $tasks);
-
+        //chaining them for now
+        return view('tasks.index')->with('tasks', $tasks)->with('name', $name);
     }
 
     /**
@@ -39,13 +41,16 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Create a new task
         $newTask = new Task;
         $newTask->taskTitle = $request->taskTitle;
         $newTask->description = $request->description;
         $newTask->date = $request->date;
+        $newTask->user_id = auth()->user()->id;
+        // $post->user_id = auth()->user()->id;
         $newTask->save();
-        return redirect()->route('tasks.index');
+        // return redirect()->route('tasks.index');
+        return redirect('/tasks')->with('success', 'Task Created');
     }
 
     /**
@@ -56,7 +61,7 @@ class TasksController extends Controller
      */
     public function show($id)
     {
-        $taskInfo = Task::find($id);
+        $taskInfo = Task::fi;
         return view('tasks.show')->with('taskInfo', $taskInfo);
     }
 
@@ -82,11 +87,12 @@ class TasksController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $task = Task::find($id);
         $task->taskTitle = $request->taskTitle;
         $task->description = $request->description;
         $task->date = $request->date;
         $task->save();
-        return redirect()->route('tasks.index');
+        return redirect('/tasks')->with('success', 'Stock updated.');
     }
 
     /**
@@ -98,5 +104,9 @@ class TasksController extends Controller
     public function destroy($id)
     {
         //
+        $task = Task::find($id);
+        $task->delete();
+        return redirect('/tasks')->with('success', 'Task removed.'); 
     }
+
 }

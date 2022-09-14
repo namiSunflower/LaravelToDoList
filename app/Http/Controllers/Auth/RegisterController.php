@@ -29,7 +29,9 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
+    //direct user directly to their list of tasks
+    protected $redirectTo = '/tasks';
 
     /**
      * Create a new controller instance.
