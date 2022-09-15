@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TasksController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\ResetPasswordController;
@@ -101,9 +102,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //         Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');
 //   });
 
-  Route::group(['prefix' => '/admin', 'as' => 'tasks.'], function () {
+  Route::group(['prefix' => '/admin', 'as' => 'admin.'], function () {
       //All the admin routes will be defined here...
         //Login Routes
+        Route::get('/home',[HomeController::class, 'index'])->name('home');
         Route::get('/login',[LoginController::class, 'showLoginForm'])->name('login');
         Route::post('/login',[LoginController::class, 'login']);
         Route::post('/logout',[LoginController::class, 'logout'])->name('logout');
@@ -115,8 +117,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
         // Route::post('/password/email','ForgotPasswordController@sendResetLinkEmail')->name('password.email');
     
         //Reset Password Routes
-        Route::get('/password/reset{token}',[ResetPasswordController::class, 'showResetForm'])->name('password.request');
-        Route::post('/password/reset{token}',[ResetPasswordController::class, 'reset'])->name('password.update');
+        // Route::get('/password/reset{token}',[ResetPasswordController::class, 'showResetForm'])->name('password.request');
+        // Route::post('/password/reset{token}',[ResetPasswordController::class, 'reset'])->name('password.update');
         // Route::get('/password/reset/{token}','ResetPasswordController@showResetForm')->name('password.reset');
         // Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');
 });

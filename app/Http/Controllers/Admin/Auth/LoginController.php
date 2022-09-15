@@ -18,7 +18,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('auth.login',[
+        return view('admin.login',[
             'title' => 'Admin Login',
             'loginRoute' => 'admin.login',
             'forgotPasswordRoute' => 'admin.password.request',
@@ -40,9 +40,11 @@ class LoginController extends Controller
         return redirect()
             ->intended(route('admin.home'))
             ->with('status','You are Logged in as Admin!');
+        // return view('admin.home');
     }
 
         //Redirect the admin...
+        return $this-> loginFailed();
     }
 
     /**
@@ -53,8 +55,10 @@ class LoginController extends Controller
     public function logout()
     {
       //logout the admin...
-      \Auth::logout();
-      return redirect('/')->with('status','User has been logged out!');
+      Auth::guard('admin')->logout();
+      return redirect()
+          ->route('admin.login')
+          ->with('status','Admin has been logged out!');
     }
 
     /**
