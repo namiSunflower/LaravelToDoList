@@ -101,7 +101,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //         Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');
 //   });
 
-  Route::group(['prefix' => '/admin', 'as' => 'tasks.', 'middleware' => 'auth'], function () {
+  Route::group(['prefix' => '/admin', 'as' => 'tasks.'], function () {
       //All the admin routes will be defined here...
         //Login Routes
         Route::get('/login',[LoginController::class, 'login'])->name('login');
