@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TasksController;
-use App\Http\Con\TasksController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -33,7 +32,7 @@ Route::get('/tasks', [TasksController::class, 'index'])->name('home');
 //show all tasks
 Route::get('/tasks', [TasksController::class, 'index']);
 //show one task by id
-Route::group(['prefix' => '/tasks', 'as' => 'tasks.'], function () {
+Route::group(['prefix' => '/tasks', 'as' => 'tasks.', 'middleware' => 'auth'], function () {
     Route::get('/', [TasksController::class, 'index'])->name('index');
     Route::get('/create', [TasksController::class, 'create'])->name('create');
     Route::get('/{task}', [TasksController::class, 'show'])->name('show');
