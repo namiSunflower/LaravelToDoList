@@ -57,7 +57,7 @@
                     <a id="adminDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::guard('admin')->user()->name }} (ADMIN) <span class="caret"></span>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="adminDropdown">
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <a href="{{route('admin.home')}}" class="dropdown-item">Dashboard</a>
                         <a class="dropdown-item" href="#" onclick="event.preventDefault();document.querySelector('#admin-logout-form').submit();">
                             Logout
