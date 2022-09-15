@@ -108,8 +108,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
         Route::get('/logout',[LoginController::class, 'logout'])->name('logout');
     
         //Forgot Password Routes
-        Route::get('/password/reset',[LoginController::class, 'showLinkRequestForm'])->name('password.request');
-        Route::post('/password/email',[LoginController::class, 'sendResetLinkEmail'])->name('password.email');
+        Route::get('/password/reset',[ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+        Route::post('/password/email',[ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
         // Route::get('/password/reset','ForgotPasswordController@showLinkRequestForm')->name('password.request');
         // Route::post('/password/email','ForgotPasswordController@sendResetLinkEmail')->name('password.email');
     
