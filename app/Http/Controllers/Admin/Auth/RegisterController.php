@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -41,6 +42,19 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
+    
+    public function register(){
+        return view('admin.register', [
+            'title' => 'Admin Registration',
+            'registerRoute' => 'admin.validator'
+        ]);
+    }
+
+    // return view('admin.login',[
+    //     'title' => 'Admin Login',
+    //     'loginRoute' => 'admin.login',
+    //     'forgotPasswordRoute' => 'admin.password.request',
+    // ]);
 
     /**
      * Get a validator for an incoming registration request.
@@ -48,13 +62,23 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function validator(Request $request)
     {
-        return Validator::make($data, [
+        $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'unique:admins'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
+        //compile all data
+        $data = $request->all();
+        //create new admin using data
+        $check = $this->create($data);
+
+        return redirect()->route('admin.home')
+        ->with('success','New Admin has been registered!');
+        // return redirect("admin.home")->with('success', 'New Admin has been registered!');
+        //unsure if code below will work
+        // return redirect()->route('tasks.index')->with('success', 'Task updated!');
     }
 
     /**

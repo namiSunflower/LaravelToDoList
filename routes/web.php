@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\Admin\HomeController;
-use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,7 +54,6 @@ Route::group(['prefix' => '/tasks', 'as' => 'tasks.', 'middleware' => 'auth'], f
 // Route::delete('/tasks/{id}', [TasksController::class, 'delete']);
 // //edit task screen
 // Route::get('/tasks/{id}/edit', [TasksController::class, 'edit']);
-
 
 //Only logged in users can access routes
 // Route::resource('tasks', TasksController::class);
