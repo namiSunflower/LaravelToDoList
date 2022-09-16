@@ -3,9 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\Admin\HomeController;
-use App\Http\Controllers\Admin\Auth\LoginController;
-use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
-use App\Http\Controllers\Admin\Auth\ResetPasswordController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -23,7 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+// Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/tasks', [TasksController::class, 'index'])->name('home');
@@ -68,57 +65,3 @@ Route::group(['prefix' => '/tasks', 'as' => 'tasks.', 'middleware' => 'auth'], f
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//Admin Routes
-// Route::namespace('Auth')->group(function(){
-        
-//     //Login Routes
-//     Route::get('/login','LoginController@showLoginForm')->name('login');
-//     Route::post('/login','LoginController@login');
-//     Route::post('/logout','LoginController@logout')->name('logout');
-
-//     //Forgot Password Routes
-//     Route::get('/password/reset','ForgotPasswordController@showLinkRequestForm')->name('password.request');
-//     Route::post('/password/email','ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-
-//     //Reset Password Routes
-//     Route::get('/password/reset/{token}','ResetPasswordController@showResetForm')->name('password.reset');
-//     Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');
-
-// });
-
-// Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
-//     //All the admin routes will be defined here...
-//         //Login Routes
-//         Route::get('/login','LoginController@showLoginForm')->name('login');
-//         Route::post('/login','LoginController@login');
-//         Route::post('/logout','LoginController@logout')->name('logout');
-    
-//         //Forgot Password Routes
-//         Route::get('/password/reset','ForgotPasswordController@showLinkRequestForm')->name('password.request');
-//         Route::post('/password/email','ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-    
-//         //Reset Password Routes
-//         Route::get('/password/reset/{token}','ResetPasswordController@showResetForm')->name('password.reset');
-//         Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');
-//   });
-
-  Route::group(['prefix' => '/admin', 'as' => 'admin.'], function () {
-      //All the admin routes will be defined here...
-        //Login Routes
-        Route::get('/home',[HomeController::class, 'index'])->name('home');
-        Route::get('/login',[LoginController::class, 'showLoginForm'])->name('login');
-        Route::post('/login',[LoginController::class, 'login']);
-        Route::post('/logout',[LoginController::class, 'logout'])->name('logout');
-    
-        //Forgot Password Routes
-        Route::get('/password/reset',[ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
-        Route::post('/password/email',[ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-        // Route::get('/password/reset','ForgotPasswordController@showLinkRequestForm')->name('password.request');
-        // Route::post('/password/email','ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-    
-        //Reset Password Routes
-        // Route::get('/password/reset{token}',[ResetPasswordController::class, 'showResetForm'])->name('password.request');
-        // Route::post('/password/reset{token}',[ResetPasswordController::class, 'reset'])->name('password.update');
-        // Route::get('/password/reset/{token}','ResetPasswordController@showResetForm')->name('password.reset');
-        // Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');
-});
