@@ -31,8 +31,9 @@ Route::get('/tasks', [TasksController::class, 'index'])->name('home');
 // });
 
 //show all tasks
-Route::get('/tasks', [TasksController::class, 'index']);
-//show one task by id
+//will check later if this doesn't work
+// Route::get('/tasks', [TasksController::class, 'index']);
+
 Route::group(['prefix' => '/tasks', 'as' => 'tasks.', 'middleware' => 'auth'], function () {
     Route::get('/', [TasksController::class, 'index'])->name('index');
     Route::get('/create', [TasksController::class, 'create'])->name('create');

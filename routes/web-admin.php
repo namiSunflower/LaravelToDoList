@@ -30,12 +30,12 @@ use Illuminate\Support\Facades\Auth;
         Route::post('/logout',[LoginController::class, 'logout'])->name('logout');
 
         //Register Route
-        Route::get('/register', [RegisterController::class, 'register'])->name('register');
-        Route::post('/register',[LoginController::class, 'register'])->
+        // Route::get('/register', [RegisterController::class, 'register'])->name('register');
+        // // Route::post('/register',[LoginController::class, 'register'])->
     
-        //Forgot Password Routes
-        Route::get('/password/reset',[ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
-        Route::post('/password/email',[ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+        // //Forgot Password Routes
+        // Route::get('/password/reset',[ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+        // Route::post('/password/email',[ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
         // Route::get('/password/reset','ForgotPasswordController@showLinkRequestForm')->name('password.request');
         // Route::post('/password/email','ForgotPasswordController@sendResetLinkEmail')->name('password.email');
     
