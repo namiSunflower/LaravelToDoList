@@ -52,9 +52,8 @@
                             </form>
                         </div>
                     </li>
-                    @endguest
-                {{-- @endadmin --}}
-                {{-- @if(Auth::guard('admin')->check())
+                    @endguest 
+                @if(Auth::guard('admin')->check())
                 <li class="nav-item dropdown">
                     <a id="adminDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::guard('admin')->user()->name }} (ADMIN) <span class="caret"></span>
@@ -69,7 +68,7 @@
                         </form>
                     </div>
                 </li>
-                @endif --}}
+                @endif
 
             </ul>
         </div>

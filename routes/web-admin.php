@@ -47,7 +47,7 @@ Route::post('/password/reset{token}',[ResetPasswordController::class, 'reset'])-
 
 //Admin CRUD
 // Route::group(['middleware' => ['admin']], function(){
-    Route::get('/home',[HomeController::class, 'index'])->name('home')->middleware([Auth::guard('admin')->user()]);
+    Route::get('/home',[HomeController::class, 'index'])->name('home')->middleware(['auth:admin']);
     Route::get('/create', [HomeController::class, 'create'])->name('create');
     Route::get('/{task}', [HomeController::class, 'show'])->name('show');
     Route::get('/{task}/edit', [HomeController::class, 'edit'])->name('edit');
