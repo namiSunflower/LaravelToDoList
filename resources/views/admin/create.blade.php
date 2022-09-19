@@ -3,17 +3,23 @@
     <div class="container">
         <!-- <div class="relative flex items-top justify-content-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0"> -->
             <!-- <h1>Create Task</h1> -->
-            <form method="post" action="{{ route('tasks.store')}}">
+            <form method="post" action="{{ route('admin.store')}}">
                 @csrf
+                <label for ="users">User</label><br>
+                <select name="users">
+                    @foreach ($user as $u)
+                          <option value="{{ $u->id }}" > {{ $u->name }}</option>
+                    @endforeach
+                </select><br>
                 <label for ="newTask">Task Title</label><br>
                 <input type="text" name = "taskTitle" id="taskTitle"><br>
                 @if ($errors->has('taskTitle'))
                     <span class="text-danger">{{ $errors->first('taskTitle') }}</span><br>
                 @endif
-                <label for ="description">Description</label><br>
+                <label for ="description">description</label><br>
                 <textarea id="description" name="description" rows="4" cols="50"></textarea><br>
-                <label for ="newTask">Date</label><br>
-                <input id="date" name="date"><br>
+                <label for ="newTask">date</label><br>
+                <input id="date" type="date" name="date"><br>
                 @if ($errors->has('date'))
                 <span class="text-danger">{{ $errors->first('date') }}</span><br><br>
                 @endif

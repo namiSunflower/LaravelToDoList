@@ -24,7 +24,6 @@ use Illuminate\Support\Facades\Auth;
 
 //All the admin routes will be defined here...
 //Login Routes
-Route::get('/home',[HomeController::class, 'index'])->name('home');
 Route::get('/login',[LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login',[LoginController::class, 'login']);
 Route::post('/logout',[LoginController::class, 'logout'])->name('logout');
@@ -45,3 +44,14 @@ Route::get('/password/reset{token}',[ResetPasswordController::class, 'showResetF
 Route::post('/password/reset{token}',[ResetPasswordController::class, 'reset'])->name('password.update');
 // Route::get('/password/reset/{token}','ResetPasswordController@showResetForm')->name('password.reset');
 // Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');
+
+//Admin CRUD
+Route::group(['middleware' => ['auth:admin']], function(){
+    Route::get('/home',[HomeController::class, 'index'])->name('home');
+    Route::get('/create', [HomeController::class, 'create'])->name('create');
+    Route::get('/{task}', [HomeController::class, 'show'])->name('show');
+    Route::get('/{task}/edit', [HomeController::class, 'edit'])->name('edit');
+    Route::post('/', [HomeController::class, 'store'])->name('store');
+    Route::put('/{task}', [HomeController::class, 'update'])->name('update');
+    Route::delete('/{task}', [HomeController::class, 'destroy'])->name('destroy');
+});

@@ -33,7 +33,7 @@
 </head>
 <body>
 
-    @include('inc.navbar')
+    @include('inc.admin_navbar')
     <main class="container mt-4">
         @yield('content')
     </main>

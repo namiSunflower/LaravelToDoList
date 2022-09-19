@@ -12,13 +12,13 @@
             <h3>{{$task-> taskTitle}}</h3>
             <small>Created on {{$task -> created_at}}</small><br>
             <small>Updated at {{$task -> updated_at}}</small><br>
-            <a href="{{ route('tasks.show', $task->id)}}" class="btn btn-secondary">View</a>
+            <a href="{{ route('admin.show', $task->id)}}" class="btn btn-secondary">View</a>
         </div>
             @endforeach
         @else
         <p>You have no tasks. Make sure to create a new one to keep track of your goals!</p>
         @endif  
     <br>
-    <a href="/tasks/create" class= "btn btn-primary">Create New Task</a>
+    <a href="/admin/create" class= "btn btn-primary">Create New Task</a>
 </div>      
 @endsection
