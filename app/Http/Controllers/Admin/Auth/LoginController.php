@@ -37,8 +37,13 @@ class LoginController extends Controller
         $this->validator($request);
         if(\Auth::guard('admin')->attempt($request->only('email','password'),$request->filled('remember'))){
         //Login the admin...
+        // return redirect()
+        // ->intended(route('admin.home'))
+        // ->with('status','You are Logged in as Admin!');
+
+        //Login admin
         return redirect()
-        ->intended(route('admin.home'))
+        ->route('admin.home')
         ->with('status','You are Logged in as Admin!');
     }
 

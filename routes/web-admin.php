@@ -46,12 +46,12 @@ Route::post('/password/reset{token}',[ResetPasswordController::class, 'reset'])-
 // Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');
 
 //Admin CRUD
-Route::group(['middleware' => ['auth:admin']], function(){
-    Route::get('/home',[HomeController::class, 'index'])->name('home');
+// Route::group(['middleware' => ['admin']], function(){
+    Route::get('/home',[HomeController::class, 'index'])->name('home')->middleware([Auth::guard('admin')->user()]);
     Route::get('/create', [HomeController::class, 'create'])->name('create');
     Route::get('/{task}', [HomeController::class, 'show'])->name('show');
     Route::get('/{task}/edit', [HomeController::class, 'edit'])->name('edit');
     Route::post('/', [HomeController::class, 'store'])->name('store');
     Route::put('/{task}', [HomeController::class, 'update'])->name('update');
     Route::delete('/{task}', [HomeController::class, 'destroy'])->name('destroy');
-});
+// });
