@@ -17,8 +17,11 @@ return new class extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('taskTitle');
+            $table->date('date');
             $table->mediumText('description');
-            $table->integer('isComplete');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')
+            ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

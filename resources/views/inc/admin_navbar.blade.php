@@ -17,18 +17,17 @@
             <ul class="navbar-nav ms-auto">
                 <!-- Authentication Links -->
                 @guest
-                    @if (Route::has('admin.login'))
+                    @if (Route::has('login'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.login') }}">{{ __('Login') }}</a>
                         </li>
                     @endif
 
-                    @if (Route::has('admin.register'))
+                    @if (Route::has('register'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.register') }}">{{ __('Register') }}</a>
                         </li>
-                    @endguest
-                {{-- @admin --}}
+                    @endif
                 @else
                     <li class="nav-item dropdown">
                         <a class="nav-link " href="/tasks" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -37,13 +36,13 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{\Auth::admin()->name }}
+                            {{ Auth::guard('admin')->user()->name}}
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('admin.logout') }}"
                                onclick="event.preventDefault();
-                                             document.getElementById('admin.logout-form').submit();">
+                                             document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
 
@@ -52,24 +51,7 @@
                             </form>
                         </div>
                     </li>
-                    @endguest 
-                @if(Auth::guard('admin')->check())
-                <li class="nav-item dropdown">
-                    <a id="adminDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        {{ Auth::guard('admin')->user()->name }} (ADMIN) <span class="caret"></span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <a href="{{route('admin.home')}}" class="dropdown-item">Dashboard</a>
-                        <a class="dropdown-item" href="#" onclick="event.preventDefault();document.querySelector('#admin-logout-form').submit();">
-                            Logout
-                        </a>
-                        <form id="admin-logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    </div>
-                </li>
-                @endif
-
+                @endguest
             </ul>
         </div>
     </div>

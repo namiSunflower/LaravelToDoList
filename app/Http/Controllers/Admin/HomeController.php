@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\models\Task;
 use App\models\User;
 use Illuminate\Http\Request;
-use App\Http\Requests\TaskCreateRequest;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\TaskUpdateRequest;
+use App\Http\Requests\UserUpdateRequest;
 
 class HomeController extends Controller
 {
@@ -19,67 +19,24 @@ class HomeController extends Controller
     // public function index(){
     //     return view('admin.home');
     // }
-
     public function index()
     {
-        //Display all user's tasks
-        // $user_id = auth()->user()->id;
-        // $task_user_id = Task::find($user_id);
-        $tasks = Task::all();
-
         //Only show tasks by user who is logged in
+        $users = User::latest()->take(5)->get();
 
         //chaining them for now
         // return view('tasks.index')->with('tasks', $tasks)->with('name', $name);
-        // $test = User::all()->pluck('id');
-        //  $test = User::select('id','name')->get();
-        // return $test;
-
-        return view('admin.home')->with(compact(['tasks']));
+        return view('admin.dashboard')->with(compact(['users']));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function allUsers()
     {
-        //
-        $user = User::select('id','name')->get();
-        return view('admin.create')->with(compact(['user']));
-    }
+        //Only show tasks by user who is logged in
+        $users = User::all();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(TaskCreateRequest $request)
-    {
-        //Create a new task
-        $task = new Task;
-        $task->taskTitle = $request->input('taskTitle');
-        $task->description = $request->input('description');
-        $task->date = $request->input('date');
-        $task->user_id = $request->input('users');
-        //Save Task
-        $task->save();
-
-        return redirect()->route('admin.home', $task)->with('success', 'Task created!');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Task $task)
-    {
-        // $taskInfo = Task::find($id);
-        return view('admin.show')->with(compact(['task']));
+        //chaining them for now
+        // return view('tasks.index')->with('tasks', $tasks)->with('name', $name);
+        return view('admin.user.allUsers')->with(compact(['users']));
     }
 
     /**
@@ -88,11 +45,11 @@ class HomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Task $task)
+    public function edit(User $user)
     {
         // $task = Task::find($id);
         // return $task;
-        return view('admin.edit')->with(compact(['task']));
+        return view('admin.user.edit')->with(compact(['user']));
     }
 
     /**
@@ -102,16 +59,23 @@ class HomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(TaskUpdateRequest $request, Task $task)
+    public function update(UserUpdateRequest $request, User $user)
     {
         //
-        $task->taskTitle = $request->input('taskTitle');
-        $task->description = $request->input('description');
-        $task->date= $request->input('date');
-        // $task->date = $request->date;
-        $task->save();
+        // if (count($request->all())){
+        //     return redirect()->route('admin.home', $user)->withErrors('Cannot leave fields empty!');
+        // }
+        $user->name = $request->input('name');
+        if($request->email != $user->email){
+            $user->email = $request->input('email');
+        }
+        $user->password= $request->password;
+        // $password = $request->input('password');
+        // $hashedPassword = Hash::make('password');
+        // $user->password= $hashedPassword;
+        $user->save();
         // return redirect('tasks')->with('success', 'Stock updated.');
-        return redirect()->route('admin.home', $task)->with('success', 'Task updated!');
+        return redirect()->route('admin.home', $user)->with('success', 'User updated!');
     }
 
     /**
@@ -120,11 +84,16 @@ class HomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Task $task)
+    public function destroy(User $user)
     {
         //
-        $task->delete();
+        $user->delete();
         // return redirect('/tasks')->with('success', 'Task removed.'); 
-        return redirect()->route('admin.home', $task)->with('success', 'Task removed!');
+        return redirect()->route('admin.home', $user)->with('success', 'User has been successfully deleted!');
+    }
+
+    public function allTasks(User $user){
+
+
     }
 }

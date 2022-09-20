@@ -12,8 +12,8 @@
                 @endif
                 <label for ="description">Description</label><br>
                 <textarea id="description" name="description" rows="4" cols="50"></textarea><br>
-                <label for ="newTask">Date</label><br>
-                <input id="date" name="date"><br>
+                <label for ="newTask">Deadline</label><br>
+                <input id="date" type="date" name="date"><br>
                 @if ($errors->has('date'))
                 <span class="text-danger">{{ $errors->first('date') }}</span><br><br>
                 @endif

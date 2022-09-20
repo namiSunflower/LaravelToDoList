@@ -26,7 +26,6 @@ use Illuminate\Support\Facades\Auth;
 //Login Routes
 Route::get('/login',[LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login',[LoginController::class, 'login']);
-Route::post('/logout',[LoginController::class, 'logout'])->name('logout');
 
 
 //Register Routes
@@ -45,13 +44,15 @@ Route::post('/password/reset{token}',[ResetPasswordController::class, 'reset'])-
 // Route::get('/password/reset/{token}','ResetPasswordController@showResetForm')->name('password.reset');
 // Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');
 
-//Admin CRUD
-// Route::group(['middleware' => ['admin']], function(){
-    Route::get('/home',[HomeController::class, 'index'])->name('home')->middleware(['auth:admin']);
-    Route::get('/create', [HomeController::class, 'create'])->name('create');
-    Route::get('/{task}', [HomeController::class, 'show'])->name('show');
-    Route::get('/{task}/edit', [HomeController::class, 'edit'])->name('edit');
-    Route::post('/', [HomeController::class, 'store'])->name('store');
-    Route::put('/{task}', [HomeController::class, 'update'])->name('update');
-    Route::delete('/{task}', [HomeController::class, 'destroy'])->name('destroy');
-// });
+//Admin Task CRUD
+Route::group(['middleware' => ['auth:admin']], function(){
+    Route::get('/home',[HomeController::class, 'index'])->name('home');
+    Route::get('/user/allUsers',[HomeController::class, 'allUsers'])->name('allUsers');
+    // Route::get('/{task}', [HomeController::class, 'show'])->name('show')->middleware(['auth:admin']);
+    Route::get('/user/{user}/edit', [HomeController::class, 'edit'])->name('edit');
+    Route::put('/user/{user}', [HomeController::class, 'update'])->name('update');
+    Route::delete('/user/{user}', [HomeController::class, 'destroy'])->name('destroy');
+
+    //Logout
+    Route::post('/logout',[LoginController::class, 'logout'])->name('logout');
+});
