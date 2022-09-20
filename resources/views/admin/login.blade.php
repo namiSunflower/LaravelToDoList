@@ -23,7 +23,7 @@
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} mt-2" name="password" required>
 
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback" role="alert">
@@ -34,7 +34,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
+                                <div class="form-check mt-2">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">

@@ -5,20 +5,22 @@
             <form method="post" action="{{ route('admin.update', $user->id)}}">
                 @csrf
                 @method('put')
-                <label for ="name">Name</label><br>
-                <input type="text" name = "name" id="name" value="{{$user->name}}"><br>
-                <label for ="email">Email</label><br>
-                <input type="email" name = "email" id="email" value="{{$user->email}}"><br>
+                <label for ="name" class="f-3">Name</label><br>
+                <input type="text" name = "name" id="name" class="form-control input-lg" value="{{$user->name}}"><br>
+                <label for ="email" class="f-3" class="form-control input-lg">Email</label><br>
+                <input type="email" name = "email" class="form-control input-lg" id="email" value="{{$user->email}}"><br>
                 @if ($errors->has('email'))
                     <span class="text-danger">{{ $errors->first('email') }}</span><br>
                 @endif
-                <label for ="password">Password</label><br>
-                <input id="password" name="password" type="password"><br>
+                <label for ="password" class="f-3">Password</label><br>
+                <input id="password" name="password" class="form-control input-lg" type="password"><br>
                 @if ($errors->has('password'))
                     <span class="text-danger">{{ $errors->first('password') }}</span><br>
                 @endif
                 <br>
-                <input type="submit">
+                <div class="text-center">
+                    <input type="submit" class="btn btn-success fs-4">
+                </div>
             </form>
             <h2>Tasks </h2>
             @if(count($tasks) > 0)

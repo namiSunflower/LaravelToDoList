@@ -22,11 +22,12 @@ class HomeController extends Controller
     public function index()
     {
         //Only show tasks by user who is logged in
+        $name = auth()->user()->name;
         $users = User::latest()->take(5)->get();
 
         //chaining them for now
         // return view('tasks.index')->with('tasks', $tasks)->with('name', $name);
-        return view('admin.dashboard')->with(compact(['users']));
+        return view('admin.dashboard')->with(compact(['name', 'users']));
     }
 
     public function allUsers()
