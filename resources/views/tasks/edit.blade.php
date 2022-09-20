@@ -10,7 +10,7 @@
                 <label for ="description">description</label><br>
                 <textarea id="description" name="description" placeholder="{{$task->description}}" rows="4" cols="50"></textarea><br>
                 <label for ="newTask">date</label><br>
-                <input id="date" name="date" value="{{$task->date}}"></input><br><br>
+                <input id="date" type="date" name="date" value="{{$task->date}}"><br><br>
                 <input type="submit">
             </form>
         </div>
