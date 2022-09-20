@@ -13,17 +13,23 @@
                     <span class="text-danger">{{ $errors->first('email') }}</span><br>
                 @endif
                 <label for ="password">Password</label><br>
-                <input id="password" name="password" type="password" value="{{$user->password}}"><br>
+                <input id="password" name="password" type="password"><br>
                 @if ($errors->has('password'))
                     <span class="text-danger">{{ $errors->first('password') }}</span><br>
                 @endif
                 <br>
                 <input type="submit">
             </form>
-            <div id="taskList">
-                
-            </div>
-        </div>
-
+            <h2>Tasks </h2>
+            @if(count($tasks) > 0)
+                @foreach($tasks as $task)
+                <div class="task-container border border-secondary text-center">
+                    <h3>{{$task-> taskTitle}}</h3>
+                    <small>Deadline: {{$task -> date}}</small><br>
+                    <p> {{$task -> description}}</p>
+                </div>
+                @endforeach 
+            @else
+            <p>You have no tasks. Make sure to create a new one to keep track of your goals!</p>
+            @endif  
 @endsection
-

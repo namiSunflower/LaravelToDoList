@@ -33,7 +33,7 @@ class HomeController extends Controller
     {
         //Only show tasks by user who is logged in
         $users = User::all();
-
+        // return dd($users);
         //chaining them for now
         // return view('tasks.index')->with('tasks', $tasks)->with('name', $name);
         return view('admin.user.allUsers')->with(compact(['users']));
@@ -49,7 +49,9 @@ class HomeController extends Controller
     {
         // $task = Task::find($id);
         // return $task;
-        return view('admin.user.edit')->with(compact(['user']));
+        $tasks = $user->tasks;
+
+        return view('admin.user.edit')->with(compact(['user', 'tasks']));
     }
 
     /**
@@ -69,7 +71,9 @@ class HomeController extends Controller
         if($request->email != $user->email){
             $user->email = $request->input('email');
         }
-        $user->password= $request->password;
+        if(isset($user->password)){
+            $user->password= bcrypt($request->password);
+        }
         // $password = $request->input('password');
         // $hashedPassword = Hash::make('password');
         // $user->password= $hashedPassword;
@@ -92,8 +96,8 @@ class HomeController extends Controller
         return redirect()->route('admin.home', $user)->with('success', 'User has been successfully deleted!');
     }
 
-    public function allTasks(User $user){
-
-
-    }
+    // public function allTasks(User $user){
+    //     $tasks = $user->tasks->all();
+    //     return view('admin.user.edit')->with(compact(['tasks']));
+    // }
 }

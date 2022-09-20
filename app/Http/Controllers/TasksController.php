@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\models\User;
 use App\models\Task;
 use App\Http\Requests\TaskCreateRequest;
 use App\Http\Requests\TaskUpdateRequest;
@@ -62,6 +63,10 @@ class TasksController extends Controller
         $task->user_id = auth()->user()->id;
         // $post->user_id = auth()->user()->id;
         $task->save();
+
+        // $user = User::find($request->user_id)
+        // ->tasks()->where('id', $task->user_id)->first();
+        // $user->tasks()->save($task);
         // return redirect()->route('tasks.index');
         // return redirect('tasks')->with('success', 'Task Created');
         return redirect()->route('tasks.index', $task)->with('success', 'Task created!');

@@ -44,7 +44,7 @@ class LoginController extends Controller
         //Login admin
         return redirect()
         ->route('admin.home')
-        ->with('status','You are Logged in as Admin!');
+        ->with('success','You are Logged in as Admin!');
     }
 
         //Redirect the admin...
