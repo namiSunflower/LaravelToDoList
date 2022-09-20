@@ -16,7 +16,7 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ms-auto">
                 <!-- Authentication Links -->
-                @if(Auth::guest())
+                @if(Auth::guest() || Auth::user()->name )
                     @if (Route::has('login'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.login') }}">{{ __('Login') }}</a>
@@ -28,7 +28,8 @@
                             <a class="nav-link" href="{{ route('admin.register') }}">{{ __('Register') }}</a>
                         </li>
                     @endif
-                @else
+                @endif
+                @if(Auth::guard('admin'))
                     <li class="nav-item dropdown">
                         <a class="nav-link " href="/tasks" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
                            Dashboard
@@ -36,7 +37,7 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::guard('admin')->user()->name}}
+                            {{ Auth::user()->name}}
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
