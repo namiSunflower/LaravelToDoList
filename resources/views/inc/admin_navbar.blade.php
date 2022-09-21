@@ -22,16 +22,14 @@
                             <a class="nav-link" href="{{ route('admin.login') }}">{{ __('Login') }}</a>
                         </li>
                     @endif
-
                     @if (Route::has('register'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.register') }}">{{ __('Register') }}</a>
                         </li>
                     @endif
-                @endguest
-                @auth('admin')
+                @elseif(Auth::user()->name)
                     <li class="nav-item dropdown">
-                        <a class="nav-link " href="/tasks" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a class="nav-link " href="{{ route('admin.home') }}" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
                            Dashboard
                         </a>
                     </li>
@@ -52,7 +50,7 @@
                             </form>
                         </div>
                     </li>
-                @endauth
+                @endif
             </ul>
         </div>
     </div>

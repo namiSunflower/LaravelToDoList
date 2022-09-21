@@ -50,12 +50,6 @@ class RegisterController extends Controller
         ]);
     }
 
-    // return view('admin.login',[
-    //     'title' => 'Admin Login',
-    //     'loginRoute' => 'admin.login',
-    //     'forgotPasswordRoute' => 'admin.password.request',
-    // ]);
-
     /**
      * Get a validator for an incoming registration request.
      *
@@ -76,9 +70,6 @@ class RegisterController extends Controller
 
         return redirect()->route('admin.home')
         ->with('success','New Admin has been registered!');
-        // return redirect("admin.home")->with('success', 'New Admin has been registered!');
-        //unsure if code below will work
-        // return redirect()->route('tasks.index')->with('success', 'Task updated!');
     }
 
     /**

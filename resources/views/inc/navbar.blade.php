@@ -30,7 +30,7 @@
                     @endif
                 @else
                     <li class="nav-item dropdown">
-                        <a class="nav-link " href="/tasks" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a class="nav-link " href="{{ route('tasks.index') }}" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
                            Dashboard
                         </a>
                     </li>
