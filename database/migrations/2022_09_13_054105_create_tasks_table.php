@@ -14,6 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tasks', function (Blueprint $table) {
+            // TODO: please try following the column ordering.
+            /**
+             * First column: PKs
+             * Second column groups: FKs
+             * Third column groups: Attributes.
+             * Last column groups: Timestamp.
+             */
             $table->increments('id');
             $table->timestamps();
             $table->string('taskTitle');

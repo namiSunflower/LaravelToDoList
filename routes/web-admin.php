@@ -30,12 +30,12 @@ Route::post('/login',[LoginController::class, 'login']);
 //Register Routes
 Route::get('/register', [RegisterController::class, 'register'])->name('register');
 Route::post('/validator',[RegisterController::class, 'validator'])->name('validator');
-    
+
 //Forgot Password Routes
 Route::get('/password/reset',[ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 Route::post('/password/email',[ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 
-    
+
 //Reset Password Routes
 Route::get('/password/reset{token}',[ResetPasswordController::class, 'showResetForm'])->name('password.request');
 Route::post('/password/reset{token}',[ResetPasswordController::class, 'reset'])->name('password.update');
@@ -43,6 +43,9 @@ Route::post('/password/reset{token}',[ResetPasswordController::class, 'reset'])-
 //Admin Task CRUD
 Route::group(['middleware' => ['auth:admin']], function(){
     Route::get('/home',[HomeController::class, 'index'])->name('home');
+    // TODO: Please following the standard routing name. (index, create, show, etc...), currently the allUsers should be index
+    // TODO: Also, instead of using the HomeController, you may create a new Controller `UserController` and define your methods there.
+    // TODO: You may group the `/user` to a group.
     Route::get('/user/allUsers',[HomeController::class, 'allUsers'])->name('allUsers');
     Route::get('/user/{user}/edit', [HomeController::class, 'edit'])->name('edit');
     Route::put('/user/{user}', [HomeController::class, 'update'])->name('update');

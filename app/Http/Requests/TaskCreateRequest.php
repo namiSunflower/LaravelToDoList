@@ -38,8 +38,9 @@ class TaskCreateRequest extends FormRequest
      */
     public function getData()
     {
-        $data = $this->only('taskTitle', 'date'); 
+        $data = $this->only('taskTitle', 'date');
         $data['user_id']= auth()->user()->id;
+        // TODO: this depends on the DB design, but if you do allow empty input, try considering the nullable() DB fields
         if(!is_null($this->description)){
             $data['description'] = $this->description;
         }

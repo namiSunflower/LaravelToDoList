@@ -19,6 +19,7 @@ Route::get('/', function () {
 });
 
 
+// TODO: I think this route is not needed, since you are also declaring the same route in the "tasks" group.
 Route::get('/tasks', [TasksController::class, 'index'])->name('home');
 
 

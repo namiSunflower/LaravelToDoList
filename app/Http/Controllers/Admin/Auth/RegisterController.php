@@ -42,7 +42,7 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
-    
+
     public function register(){
         return view('admin.register', [
             'title' => 'Admin Registration',
@@ -58,14 +58,17 @@ class RegisterController extends Controller
      */
     protected function validator(Request $request)
     {
+        // TODO: Put this into a request.
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            // TODO: the emails does not have to be unique across users table since they are separated.
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'unique:admins'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
         //compile all data
         $data = $request->all();
         //create new admin using data
+        // TODO: there's no need to have the variable `$check` anymore since $check is not being referenced anymore.
         $check = $this->create($data);
 
         return redirect()->route('admin.home')

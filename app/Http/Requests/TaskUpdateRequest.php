@@ -24,10 +24,11 @@ class TaskUpdateRequest extends FormRequest
     public function rules()
     {
         return [
+            // TODO: Please use array notation
             'taskTitle' => 'required|max:300',
             'description' => 'sometimes|nullable',
             'date' => 'required',
-        ]; 
+        ];
     }
 
     /**
@@ -37,7 +38,7 @@ class TaskUpdateRequest extends FormRequest
      */
     public function getData()
     {
-        $data = $this->only('taskTitle', 'date'); 
+        $data = $this->only('taskTitle', 'date');
         if(!is_null($this->description)){
             $data['description'] = $this->description;
         }

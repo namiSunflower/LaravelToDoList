@@ -8,7 +8,7 @@
         @if(count($users) > 0)
             @foreach($users as $user)
         <div class="task-container p-2 border border-secondary text-center">
-            <h3>{{$user-> name}}</h3>
+            <h3>{{$user-> name}}</h3> {{-- TODO: remove spaces between the arrow notation --}}
             <small>Created at {{$user -> created_at}}</small><br>
         </div>
             @endforeach
@@ -16,6 +16,6 @@
             <a href="{{ route('admin.allUsers', $user)}}" class="btn btn-secondary">Show All Users</a>
         @else
         <p>There are no users to show.</p>
-        @endif 
-</div>      
+        @endif
+</div>
 @endsection
