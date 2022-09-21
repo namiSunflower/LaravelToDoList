@@ -30,4 +30,22 @@ class TaskCreateRequest extends FormRequest
             'date' => 'required',
         ];
     }
+
+    /**
+     * Assign userId to array and set data.
+     *
+     * @return array<string, mixed>
+     */
+    public function getData()
+    {
+        $data = $this->only('taskTitle', 'date'); 
+        $data['user_id']= auth()->user()->id;
+        if(!is_null($this->description)){
+            $data['description'] = $this->description;
+        }
+        else{
+            $data['description'] ="";
+        }
+        return $data;
+    }
 }

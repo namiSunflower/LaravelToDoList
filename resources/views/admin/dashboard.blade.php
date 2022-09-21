@@ -2,8 +2,6 @@
 
 @section('content')
 <div class="container">
-    {{-- if(@auth) --}}
-    {{-- <h1 class="text-center">Welcome {{$name}}!</h1> --}}
     <h1 class="text-center">Welcome {{$name}}!</h1>
     <br>
     <h2 class="text-center">Top 5 Newest Users:</h2>
@@ -15,7 +13,7 @@
         </div>
             @endforeach
             <br>
-            <a href="{{ route('admin.allUsers', $user->id)}}" class="btn btn-secondary">Show All Users</a>
+            <a href="{{ route('admin.allUsers', $user)}}" class="btn btn-secondary">Show All Users</a>
         @else
         <p>There are no users to show.</p>
         @endif 

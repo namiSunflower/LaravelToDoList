@@ -24,10 +24,23 @@ class TaskUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
             'taskTitle' => 'required|max:300',
             'description' => 'sometimes|nullable',
             'date' => 'required',
-        ];
+        ]; 
+    }
+
+    /**
+     * Used for updating task updating.
+     *
+     * @return array<string, mixed>
+     */
+    public function getData()
+    {
+        $data = $this->only('taskTitle', 'date'); 
+        if(!is_null($this->description)){
+            $data['description'] = $this->description;
+        }
+        return $data;
     }
 }
