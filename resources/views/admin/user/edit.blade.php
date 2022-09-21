@@ -5,7 +5,11 @@
                 @csrf
                 @method('put')
                 <label for ="name" class="f-3">Name</label><br>
-                <input type="text" name = "name" id="name" class="form-control input-lg" value="{{$user->name}}"><br>
+                <input type="text" name = "name" id="name" class="form-control input-lg" value="{{old('name',$user->name)}}">
+                @if ($errors->has('name'))
+                    <span class="text-danger">{{ $errors->first('name') }}</span><br>
+                @endif
+                <br>
                 <label for ="email" class="f-3" class="form-control input-lg">Email</label><br>
                 <input type="email" name = "email" class="form-control input-lg" id="email" value="{{old('email',$user->email)}}"><br>
                 @if ($errors->has('email'))
