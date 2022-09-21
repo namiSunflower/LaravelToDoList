@@ -6,20 +6,20 @@
                 @method('put')
                 <label for ="name" class="f-3">Name</label><br>
                 <input type="text" name = "name" id="name" class="form-control input-lg" value="{{old('name',$user->name)}}">
-                @if ($errors->has('name'))
+                @error('name')
                     <span class="text-danger">{{ $errors->first('name') }}</span><br>
-                @endif
+                @enderror
                 <br>
                 <label for ="email" class="f-3" class="form-control input-lg">Email</label><br>
                 <input type="email" name = "email" class="form-control input-lg" id="email" value="{{old('email',$user->email)}}"><br>
-                @if ($errors->has('email'))
+                @error('date')
                     <span class="text-danger">{{ $errors->first('email') }}</span><br>
-                @endif
+                @enderror
                 <label for ="password" class="f-3">Password</label><br>
                 <input id="password" name="password" class="form-control input-lg" type="password"><br>
-                @if ($errors->has('password'))
+                @error('password')
                     <span class="text-danger">{{ $errors->first('password') }}</span><br>
-                @endif
+                @enderror
                 <br>
                 <div class="text-center">
                     <input type="submit" class="btn btn-success fs-4">

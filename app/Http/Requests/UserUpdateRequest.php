@@ -24,19 +24,19 @@ class UserUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'email' => 'required|unique:users,email,'.request()->route('user')->id.'|min:5|max:191',
-            'password' => 'required|string|min:8|max:255',
+            'name' => ['required'],
+            'email' => ['required','unique:users,email,'.request()->route('user')->id.'min:5', 'max:191'],
+            'password' => ['sometimes','nullable', 'string', 'min:8','max:255'],
         ];
     }
 
     public function getData(User $user)
     {
-        $data = $this->only('name', 'email', 'password'); 
+        $data = $this->only('name', 'email'); 
         if($this->email != $user->email){
             $user->email = $data['email'];
         }
-        if($this->password) {
+        if(!is_null($this->password)){
             $data['password'] = bcrypt($this->password);
         }
 

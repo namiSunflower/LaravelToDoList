@@ -16,6 +16,7 @@ class LoginController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
+    protected $redirectTo = '/admin';
     public function showLoginForm()
     {
         return view('admin.login',[
@@ -36,21 +37,15 @@ class LoginController extends Controller
         //Validation...
         $this->validator($request);
         if(\Auth::guard('admin')->attempt($request->only('email','password'),$request->filled('remember'))){
-        
-        
-        //Login the admin...
-        // return redirect()
-        // ->intended(route('admin.home'))
-        // ->with('status','You are Logged in as Admin!');
 
         //Login admin
         return redirect()
         ->route('admin.home')
         ->with('success','You are Logged in as Admin!');
-    }
-
-        //Redirect the admin...
-        return $this-> loginFailed();
+        }
+        else{
+            return $this-> loginFailed();
+        }
     }
 
     /**

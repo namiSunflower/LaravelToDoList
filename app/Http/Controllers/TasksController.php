@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\models\Task;
 use App\Http\Requests\TaskCreateRequest;
 use App\Http\Requests\TaskUpdateRequest;
+
+
 
 class TasksController extends Controller
 {
@@ -33,7 +34,6 @@ class TasksController extends Controller
      */
     public function create()
     {
-        //
         return view('tasks.create');
     }
 

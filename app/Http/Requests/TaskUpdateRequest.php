@@ -30,9 +30,17 @@ class TaskUpdateRequest extends FormRequest
         ]; 
     }
 
+    /**
+     * Used for updating task updating.
+     *
+     * @return array<string, mixed>
+     */
     public function getData()
     {
-        $data = $this->only('taskTitle', 'description', 'date'); 
+        $data = $this->only('taskTitle', 'date'); 
+        if(!is_null($this->description)){
+            $data['description'] = $this->description;
+        }
         return $data;
     }
 }

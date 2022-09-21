@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserUpdateRequest;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -14,6 +15,7 @@ class HomeController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
         $name = auth()->user()->name;
@@ -22,6 +24,11 @@ class HomeController extends Controller
         return view('admin.dashboard')->with(compact(['name', 'users']));
     }
 
+    /**
+     * Show all users.
+     * 
+     * @return \Illuminate\Http\Response
+     */
     public function allUsers()
     {
         $users = User::all();
@@ -50,17 +57,8 @@ class HomeController extends Controller
      */
     public function update(UserUpdateRequest $request, User $user)
     {
-        // $user->name = $request->input('name');
-        // if($request->email != $user->email){
-        //     $user->email = $request->input('email');
-        // }
-        // if(isset($user->password)){
-        //     $user->password= bcrypt($request->password);
-        // }
-        
-        // $user->save();
         $user->update($request->getData($user));
-        // $user->update($request ->getData());
+
         return redirect()->route('admin.home', $user)->with('success', 'User updated!');
     }
 
