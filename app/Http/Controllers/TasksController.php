@@ -17,13 +17,13 @@ class TasksController extends Controller
      */
     public function index()
     {
-        $name = auth()->user()->name;
+        $user_name = auth()->user();
         $user_id = auth()->user()->id;
 
         //Only show tasks by user who is logged in
         $tasks = Task::where('user_id', $user_id)->get();
 
-        return view('tasks.index')->with(compact(['name', 'tasks']));
+        return view('tasks.index')->with(compact(['user_name', 'tasks']));
     }
 
     /**

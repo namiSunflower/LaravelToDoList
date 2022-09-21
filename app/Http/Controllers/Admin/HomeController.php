@@ -18,10 +18,10 @@ class HomeController extends Controller
     
     public function index()
     {
-        $name = auth()->user()->name;
+        $user_name = auth()->user();
         $users = User::latest()->take(5)->get();
 
-        return view('admin.dashboard')->with(compact(['name', 'users']));
+        return view('admin.dashboard')->with(compact(['user_name', 'users']));
     }
 
     /**

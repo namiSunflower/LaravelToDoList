@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1 class="text-center">Welcome {{$name}}!</h1>
+    <h1 class="text-center">Welcome {{$user_name->name}}!</h1>
     <br>
     <h2 class="text-center">Top 5 Newest Users:</h2>
         @if(count($users) > 0)
