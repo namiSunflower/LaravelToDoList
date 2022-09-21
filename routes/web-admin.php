@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\Auth;
 */
 
 
-
 //All the admin routes will be defined here...
 //Login Routes
 Route::get('/login',[LoginController::class, 'showLoginForm'])->name('login');
@@ -35,20 +34,16 @@ Route::post('/validator',[RegisterController::class, 'validator'])->name('valida
 //Forgot Password Routes
 Route::get('/password/reset',[ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 Route::post('/password/email',[ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-// Route::get('/password/reset','ForgotPasswordController@showLinkRequestForm')->name('password.request');
-// Route::post('/password/email','ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+
     
 //Reset Password Routes
 Route::get('/password/reset{token}',[ResetPasswordController::class, 'showResetForm'])->name('password.request');
 Route::post('/password/reset{token}',[ResetPasswordController::class, 'reset'])->name('password.update');
-// Route::get('/password/reset/{token}','ResetPasswordController@showResetForm')->name('password.reset');
-// Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');
 
 //Admin Task CRUD
 Route::group(['middleware' => ['auth:admin']], function(){
     Route::get('/home',[HomeController::class, 'index'])->name('home');
     Route::get('/user/allUsers',[HomeController::class, 'allUsers'])->name('allUsers');
-    // Route::get('/{task}', [HomeController::class, 'show'])->name('show')->middleware(['auth:admin']);
     Route::get('/user/{user}/edit', [HomeController::class, 'edit'])->name('edit');
     Route::put('/user/{user}', [HomeController::class, 'update'])->name('update');
     Route::delete('/user/{user}', [HomeController::class, 'destroy'])->name('destroy');

@@ -25,7 +25,5 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    // protected $redirectTo = RouteServiceProvider::HOME;
-     //direct user directly to their list of tasks
      protected $redirectTo = '/admin/home';
 }

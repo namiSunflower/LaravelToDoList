@@ -1,8 +1,7 @@
 @extends('layouts.app')
 @section('content')
         <div class="container">
-            <!-- <h1>Create Task</h1> -->
-            <form method="post" action="{{ route('tasks.update', $task->id)}}">
+            <form method="post" action="{{ route('tasks.update', $task)}}">
                 @csrf
                 @method('put')
                 <label for ="newTask" class="fs-3">Task Title</label><br>

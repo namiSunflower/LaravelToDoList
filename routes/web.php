@@ -23,14 +23,7 @@ Route::get('/', function () {
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/tasks', [TasksController::class, 'index'])->name('home');
 
-//I didn't delete the comments just for learning reference later on
-// Route::get('/todo', function(){
-//     return view('pages.todo');
-// });
 
-//show all tasks
-//will check later if this doesn't work
-// Route::get('/tasks', [TasksController::class, 'index']);
 
 Route::group(['prefix' => '/tasks', 'as' => 'tasks.', 'middleware' => 'auth'], function () {
     Route::get('/', [TasksController::class, 'index'])->name('index');

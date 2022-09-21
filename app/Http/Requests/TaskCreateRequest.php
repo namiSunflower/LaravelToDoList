@@ -30,4 +30,11 @@ class TaskCreateRequest extends FormRequest
             'date' => 'required',
         ];
     }
+
+    public function getData()
+    {
+        $data = $this->only('taskTitle', 'description', 'date'); 
+        $data['user_id']= auth()->user()->id;
+        return $data;
+    }
 }

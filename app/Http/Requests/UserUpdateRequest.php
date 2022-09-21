@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
-
+use App\models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserUpdateRequest extends FormRequest
@@ -26,8 +26,20 @@ class UserUpdateRequest extends FormRequest
         return [
             'name' => 'sometimes|nullable',
             'email' => 'sometimes|nullable|unique:users,email,'.request()->route('user')->id.'|min:5|max:191',
-            'password' => 'sometimes|nullable|string|min:4|max:255',
+            'password' => 'sometimes|nullable|string|min:8|max:255',
         ];
     }
 
+    public function getData(User $user)
+    {
+        $data = $this->only('name', 'email', 'password'); 
+        if($this->email != $user->email){
+            $user->email = $data['email'];
+        }
+        if($this->password) {
+            $data['password'] = bcrypt($this->password);
+        }
+
+        return $data;
+    }
 }

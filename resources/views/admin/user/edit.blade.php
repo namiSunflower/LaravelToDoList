@@ -1,14 +1,13 @@
 @extends('layouts.admin')
 @section('content')
         <div class="container">
-            <!-- <h1>Create Task</h1> -->
-            <form method="post" action="{{ route('admin.update', $user->id)}}">
+            <form method="post" action="{{ route('admin.update', $user)}}">
                 @csrf
                 @method('put')
                 <label for ="name" class="f-3">Name</label><br>
                 <input type="text" name = "name" id="name" class="form-control input-lg" value="{{$user->name}}"><br>
                 <label for ="email" class="f-3" class="form-control input-lg">Email</label><br>
-                <input type="email" name = "email" class="form-control input-lg" id="email" value="{{$user->email}}"><br>
+                <input type="email" name = "email" class="form-control input-lg" id="email" value="{{old('email',$user->email)}}"><br>
                 @if ($errors->has('email'))
                     <span class="text-danger">{{ $errors->first('email') }}</span><br>
                 @endif

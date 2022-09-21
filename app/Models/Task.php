@@ -7,19 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
-    // use HasFactory;
- 
-    // //primary key
-    // public $primaryKey = 'id';
-    // //Timestamps
-    // public $timestamps = true;
 
     protected $fillable =[
         'taskTitle',
         'description',
         'date',
+        'user_id'
     ];
-    // protected $hidden
 
     public function user()
     {
