@@ -23,8 +23,10 @@ use Illuminate\Support\Facades\Auth;
 
 //All the admin routes will be defined here...
 //Login Routes
-Route::get('/login',[LoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login',[LoginController::class, 'login']);
+Route::group(['middleware' => ['guest:admin']], function(){
+    Route::get('/login',[LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login',[LoginController::class, 'login']);
+});
 
 
 //Register Routes
