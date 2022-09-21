@@ -16,14 +16,14 @@ class LoginController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    protected $redirectTo = '/admin';
     public function showLoginForm()
     {
-        return view('admin.login',[
-            'title' => 'Admin Login',
-            'loginRoute' => 'admin.login',
-            'forgotPasswordRoute' => 'admin.password.request',
-        ]);
+            return view('admin.login',[
+                'title' => 'Admin Login',
+                'loginRoute' => 'admin.login',
+                'forgotPasswordRoute' => 'admin.password.request',
+            ]);
+        
     }
 
     /**

@@ -18,7 +18,6 @@ class TasksController extends Controller
     public function index()
     {
         $name = auth()->user()->name;
-        //Display all user's tasks
         $user_id = auth()->user()->id;
 
         //Only show tasks by user who is logged in
