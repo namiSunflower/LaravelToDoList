@@ -9,10 +9,9 @@
                 @error('name')
                     <span class="text-danger">{{ $errors->first('name') }}</span><br>
                 @enderror
-                <br>
                 <label for ="email" class="f-3" class="form-control input-lg">Email</label><br>
-                <input type="email" name = "email" class="form-control input-lg" id="email" value="{{old('email',$user->email)}}"><br>
-                @error('date')
+                <input type="email" name = "email" class="form-control input-lg" id="email" value="{{old('email',$user->email)}}">
+                @error('email')
                     <span class="text-danger">{{ $errors->first('email') }}</span><br>
                 @enderror
                 <label for ="password" class="f-3">Password</label><br>

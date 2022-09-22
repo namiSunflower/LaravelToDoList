@@ -1,22 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\models\User;
-use Illuminate\Http\Request;
 use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Support\Facades\Session;
 
-class HomeController extends Controller
+class UsersController extends Controller
 {
-     /**
+    /**
      * Show Admin Dashboard.
      * 
      * @return \Illuminate\Http\Response
      */
-    
-    public function index()
+    public function dashboard()
     {
         $user_name = auth()->user();
         $users = User::latest()->take(5)->get();
@@ -29,10 +27,10 @@ class HomeController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function allUsers()
+    public function index()
     {
         $users = User::all();
-        return view('admin.user.allUsers')->with(compact(['users']));
+        return view('admin.user.index')->with(compact(['users']));
     }
 
     /**

@@ -22,13 +22,12 @@ return new class extends Migration
              * Last column groups: Timestamp.
              */
             $table->increments('id');
-            $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('taskTitle');
             $table->date('date');
-            $table->mediumText('description');
+            $table->mediumText('description')->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')
-            ->onDelete('cascade')->onUpdate('cascade');
+            $table->timestamps();
         });
     }
 

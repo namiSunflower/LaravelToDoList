@@ -1,15 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\Admin\Auth\RegisterController;
 use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\ResetPasswordController;
 
-use Illuminate\Support\Facades\Auth;
 
-/*
+/* 
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -31,7 +30,7 @@ Route::group(['middleware' => ['guest:admin']], function(){
 
 //Register Routes
 Route::get('/register', [RegisterController::class, 'register'])->name('register');
-Route::post('/validator',[RegisterController::class, 'validator'])->name('validator');
+Route::post('/create',[RegisterController::class, 'create'])->name('create');
 
 //Forgot Password Routes
 Route::get('/password/reset',[ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
@@ -44,14 +43,15 @@ Route::post('/password/reset{token}',[ResetPasswordController::class, 'reset'])-
 
 //Admin Task CRUD
 Route::group(['middleware' => ['auth:admin']], function(){
-    Route::get('/home',[HomeController::class, 'index'])->name('home');
-    // TODO: Please following the standard routing name. (index, create, show, etc...), currently the allUsers should be index
+    Route::get('/home',[UsersController::class, 'dashboard'])->name('home');    // TODO: Please following the standard routing name. (index, create, show, etc...), currently the allUsers should be index
     // TODO: Also, instead of using the HomeController, you may create a new Controller `UserController` and define your methods there.
     // TODO: You may group the `/user` to a group.
-    Route::get('/user/allUsers',[HomeController::class, 'allUsers'])->name('allUsers');
-    Route::get('/user/{user}/edit', [HomeController::class, 'edit'])->name('edit');
-    Route::put('/user/{user}', [HomeController::class, 'update'])->name('update');
-    Route::delete('/user/{user}', [HomeController::class, 'destroy'])->name('destroy');
+    Route::prefix('user')->group(function () {
+        Route::get('/index',[UsersController::class, 'index'])->name('index');
+        Route::get('/{user}/edit', [UsersController::class, 'edit'])->name('edit');
+        Route::put('/{user}', [UsersController::class, 'update'])->name('update');
+        Route::delete('/{user}', [UsersController::class, 'destroy'])->name('destroy');
+    });
 
     //Logout
     Route::post('/logout',[LoginController::class, 'logout'])->name('logout');

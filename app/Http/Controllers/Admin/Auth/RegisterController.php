@@ -5,9 +5,8 @@ namespace App\Http\Controllers\Admin\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\RegisterNewAdminController;
+
 
 class RegisterController extends Controller
 {
@@ -46,7 +45,7 @@ class RegisterController extends Controller
     public function register(){
         return view('admin.register', [
             'title' => 'Admin Registration',
-            'registerRoute' => 'admin.validator'
+            'registerRoute' => 'admin.create'
         ]);
     }
 
@@ -56,37 +55,10 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(Request $request)
+    protected function create(RegisterNewAdminController $request)
     {
-        // TODO: Put this into a request.
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            // TODO: the emails does not have to be unique across users table since they are separated.
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'unique:admins'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-        //compile all data
-        $data = $request->all();
         //create new admin using data
-        // TODO: there's no need to have the variable `$check` anymore since $check is not being referenced anymore.
-        $check = $this->create($data);
-
-        return redirect()->route('admin.home')
-        ->with('success','New Admin has been registered!');
-    }
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create(array $data)
-    {
-        return Admin::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $admin = Admin::create($request->getData());
+        return redirect()->route('admin.home', $admin)->with('success','New Admin has been registered!');
     }
 }

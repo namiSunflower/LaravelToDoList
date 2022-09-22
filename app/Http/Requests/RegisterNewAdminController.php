@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Http\FormRequest;
 
-class TaskCreateRequest extends FormRequest
+class RegisterNewAdminController extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,21 +25,16 @@ class TaskCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'taskTitle' => ['required', 'max:300'],
-            'description' => ['sometimes', 'nullable'],
-            'date' => ['required'],
+            //
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:admins'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ];
-    }
+    }   
 
-    /**
-     * Assign userId to array and set data.
-     *
-     * @return array<string, mixed>
-     */
-    public function getData()
-    {
-        $data = $this->only('taskTitle', 'description','date');
-        $data['user_id']= auth()->user()->id;
+    public function getData(){
+        $data = $this->only('name', 'email');
+        $data['password'] = Hash::make($this->password);
         return $data;
     }
 }
