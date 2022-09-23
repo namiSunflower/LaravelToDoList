@@ -38,7 +38,10 @@ class UserChartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
+    public function store()
+    {
+        //thinking whether or not I should add a create user route for the API..   
+    }
     /**
      * Display the specified resource.
      *
@@ -60,6 +63,7 @@ class UserChartController extends Controller
     public function update(UserChartUpdateRequest $request, User $user)
     {
         $user->update($request->getData());
+        return response($user, 200);
     }
 
     /**

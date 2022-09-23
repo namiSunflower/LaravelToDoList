@@ -31,11 +31,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/',[UserChartController::class, 'index'])->name('index');
 Route::get('/{user}', [UserChartController::class, 'show'])->name('show');
 
-
-Route::prefix('admin')->group(function () {
+// 'middleware' => ['auth:admin']]
+Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin']], function () {
     Route::get('/{user}/edit', [UserChartController::class, 'edit'])->name('edit');
     Route::put('/{user}', [UserChartController::class, 'update'])->name('update');
     Route::delete('/{user}', [UserChartController::class, 'destroy'])->name('destroy');
 });
-
 
