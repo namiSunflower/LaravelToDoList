@@ -33,7 +33,6 @@ Route::get('/{user}', [UserChartController::class, 'show'])->name('show');
 
 
 Route::prefix('admin')->group(function () {
-    Route::get('/create', [UserChartController::class, 'create'])->name('create');
     Route::get('/{user}/edit', [UserChartController::class, 'edit'])->name('edit');
     Route::put('/{user}', [UserChartController::class, 'update'])->name('update');
     Route::delete('/{user}', [UserChartController::class, 'destroy'])->name('destroy');
