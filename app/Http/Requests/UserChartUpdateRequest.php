@@ -31,7 +31,7 @@ class UserChartUpdateRequest extends FormRequest
 
     public function getData()
     {
-        $data = $this->only('weight', 'height');
+        $data = $this->only('id', 'weight', 'height');
         return $data;
     }
 }

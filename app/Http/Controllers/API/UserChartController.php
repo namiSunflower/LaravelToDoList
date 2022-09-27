@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Http\Resources\UserChartResource;
 use App\Http\Resources\UserChartCollection;
 use App\Http\Requests\UserChartUpdateRequest;
+use App\Http\Requests\RegisterNewUserController;
+use Psy\Readline\Userland;
 
 class UserChartController extends Controller
 {
@@ -17,9 +19,8 @@ class UserChartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
-        //
+    public function api(Request $request)
+    { 
         $filter = new UserChartFilter();
         $queryItems = $filter->transform($request);
 
@@ -28,8 +29,19 @@ class UserChartController extends Controller
         }
         else{
             $userCharts = User::where($queryItems)->paginate();
-            return new UserChartCollection($userCharts->appends($request->query()));
+            return new UserChartCollection($userCharts->appends($request->query()));;
         }
+    }
+    public function index(){
+        return view('admin.api.index');
+    }
+
+    public function create()
+    {
+        return view('admin.api.create', [
+            'title' => 'API User Creation',
+            'registerRoute' => 'api.store'
+        ]);
     }
 
     /**
@@ -38,9 +50,9 @@ class UserChartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(RegisterNewUserController $request)
     {
-        //thinking whether or not I should add a create user route for the API..   
+       return User::create($request->getData());    
     }
     /**
      * Display the specified resource.
@@ -53,6 +65,11 @@ class UserChartController extends Controller
         return new UserChartResource($user);
     }
 
+    public function edit(User $user)
+    {
+        return view('admin.api.edit')->with(compact(['user']));
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -62,8 +79,7 @@ class UserChartController extends Controller
      */
     public function update(UserChartUpdateRequest $request, User $user)
     {
-        $user->update($request->getData());
-        return response($user, 200);
+        return $user->update($request->getData());
     }
 
     /**

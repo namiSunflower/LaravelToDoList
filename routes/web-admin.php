@@ -6,6 +6,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\Admin\Auth\RegisterController;
 use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\ResetPasswordController;
+use App\Http\Controllers\API\UserChartController;
 
 
 /* 
@@ -56,3 +57,6 @@ Route::group(['middleware' => ['auth:admin']], function(){
     //Logout
     Route::post('/logout',[LoginController::class, 'logout'])->name('logout');
 });
+
+//API index
+Route::get('/api',[UserChartController::class, 'index'])->name('index');

@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterNewAdminController extends FormRequest
+class RegisterNewUserController extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,12 +29,15 @@ class RegisterNewAdminController extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'weight' => ['sometimes', 'nullable'],
+            'height' => ['sometimes', 'nullable'],
         ];
-    }   
+    }
 
     public function getData(){
-        $data = $this->only('name', 'email');
+        $data = $this->only('name', 'email', 'weight', 'height');
         $data['password'] = Hash::make($this->password);
+        
         return $data;
     }
 }
