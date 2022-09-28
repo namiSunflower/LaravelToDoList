@@ -60,9 +60,14 @@ class UserChartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function api_show(User $user)
     {
         return new UserChartResource($user);
+    }
+
+    public function show(User $user)
+    {
+        return view('admin.api.show');
     }
 
     public function edit(User $user)

@@ -60,3 +60,4 @@ Route::group(['middleware' => ['auth:admin']], function(){
 
 //API index
 Route::get('/api',[UserChartController::class, 'index'])->name('index');
+Route::get('/api/{user}', [UserChartController::class, 'show'])->name('show');

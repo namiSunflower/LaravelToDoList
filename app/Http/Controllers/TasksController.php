@@ -19,6 +19,7 @@ class TasksController extends Controller
     {
         $user_name = auth()->user();
         $user_id = auth()->user()->id;
+        $id =auth()->user()->posts;
 
         //Only show tasks by user who is logged in
         $tasks = Task::where('user_id', $user_id)->get();
