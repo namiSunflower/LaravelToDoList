@@ -67,7 +67,7 @@ class UserChartController extends Controller
 
     public function show(User $user)
     {
-        return view('admin.api.show');
+        return view('admin.api.show')->with(compact(['user']));
     }
 
     public function edit(User $user)

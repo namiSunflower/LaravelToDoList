@@ -48,7 +48,7 @@
                     if(response.data.length != 0){
                     $.each(response.data, function(key, user){
                         $('#container').append(
-                            '<div class="task-container p-3 border border-success text-center"><h3>'+user.name+'</h3>\
+                            '<div class="p-3 border border-success text-center"><h3>'+user.name+'</h3>\
                                 <a href="/admin/api/'+user.id+'" class="btn btn-secondary mt-3">View</a></div>'
                         )}
                     )
