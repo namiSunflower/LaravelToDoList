@@ -3,7 +3,7 @@
 @section('content')
 <div class="text-center" id="parent">
     <div class="container" id="container">
-    </div>  
+    </div>
 </div>
 <div id="button-wrapper" class="text-center">
     <button id="prev" class="btn btn-primary ml-5 mt-3 mb-3">Prev</button>
@@ -12,7 +12,7 @@
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
-    
+
     $(document).ready(function(){
         $.ajaxSetup({
                 headers: {
@@ -23,6 +23,10 @@
         let max_pages = 1;
         // $("#button-wrapper").remove();
         getData();
+
+        // instead of having the `current_page` variable for the page parameter, you can accept a `page` parameter of the function
+        // function getData(page) {}
+        // by doing this, the function's responsibility is to get the data with specified page number.
         function getData(){
             const usersDiv = document.createElement("div");
             // const buttonDiv = document.createElement("div");
@@ -54,6 +58,9 @@
                         if(response.meta.links.length >= 1){
                             current_page = response.meta.current_page;
                             max_pages = response.meta.links.length - 2;
+
+                            // Add a data attribute to the next page prev page button to keep their designated page num.
+                            // https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes
                         }
                     }
                     else{
@@ -68,10 +75,12 @@
 
         $("#next, #prev").on('click', (function(e){
             e.preventDefault();
-        
+
+            // instead of reassigning from the current_page variable, you can use from the data attribute of the button.
             current_page = ($(this).attr("id") == "next") ? current_page + 1: current_page -1;
-                getData();   
-            
+                getData();
+
+            // Better to use greater than/lesser than conditions instead of == condiction checking
             if(current_page !== max_pages && current_page == 1){
                 $("#prev").attr("disabled", true);
                 $("#next").attr("disabled", false);
@@ -89,4 +98,4 @@
             }
         }));
         });
-</script>   
+</script>
