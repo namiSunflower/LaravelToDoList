@@ -1,0 +1,29 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\Admin\Auth\RegisterController;
+use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
+use App\Http\Controllers\Admin\Auth\ResetPasswordController;
+use App\Http\Controllers\API\UserChartController;
+
+
+/* 
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+
+//API Admin View without auth
+Route::get('/',[UserChartController::class, 'index'])->name('index');
+Route::get('/create', [UserChartController::class, 'create'])->name('create');
+Route::get('/{user}', [UserChartController::class, 'show'])->name('show');
+Route::get('/{user}/edit', [UserChartController::class, 'edit'])->name('edit');
+

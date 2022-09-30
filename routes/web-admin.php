@@ -44,9 +44,7 @@ Route::post('/password/reset{token}',[ResetPasswordController::class, 'reset'])-
 
 //Admin Task CRUD
 Route::group(['middleware' => ['auth:admin']], function(){
-    Route::get('/home',[UsersController::class, 'dashboard'])->name('home');    // TODO: Please following the standard routing name. (index, create, show, etc...), currently the allUsers should be index
-    // TODO: Also, instead of using the HomeController, you may create a new Controller `UserController` and define your methods there.
-    // TODO: You may group the `/user` to a group.
+    Route::get('/home',[UsersController::class, 'dashboard'])->name('home');   
     Route::prefix('user')->group(function () {
         Route::get('/index',[UsersController::class, 'index'])->name('index');
         Route::get('/{user}/edit', [UsersController::class, 'edit'])->name('edit');
@@ -58,10 +56,3 @@ Route::group(['middleware' => ['auth:admin']], function(){
     Route::post('/logout',[LoginController::class, 'logout'])->name('logout');
 });
 
-//API Admin View without auth
-Route::group(['prefix' => 'api'], function () {
-    Route::get('/',[UserChartController::class, 'index'])->name('index');
-    Route::get('/create', [UserChartController::class, 'create'])->name('create');
-    Route::get('/{user}', [UserChartController::class, 'show'])->name('show');
-    Route::get('/{user}/edit', [UserChartController::class, 'edit'])->name('edit');
-});
