@@ -20,7 +20,6 @@
                 url: `/api/${id}`,
                 dataType: "JSON",
                 success: function(response){
-                    console.log(response.data);
                     $('#container').html("");
                     if(response.data.length != 0){
                         $('#container').append(

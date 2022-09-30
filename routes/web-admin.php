@@ -58,6 +58,10 @@ Route::group(['middleware' => ['auth:admin']], function(){
     Route::post('/logout',[LoginController::class, 'logout'])->name('logout');
 });
 
-//API index
-Route::get('/api',[UserChartController::class, 'index'])->name('index');
-Route::get('/api/{user}', [UserChartController::class, 'show'])->name('show');
+//API Admin View without auth
+Route::group(['prefix' => 'api'], function () {
+    Route::get('/',[UserChartController::class, 'index'])->name('index');
+    Route::get('/{user}', [UserChartController::class, 'show'])->name('show');
+    Route::get('/create', [UserChartController::class, 'create'])->name('create');
+    Route::get('/{user}/edit', [UserChartController::class, 'edit'])->name('edit');
+});

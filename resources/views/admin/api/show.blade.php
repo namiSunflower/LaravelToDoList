@@ -21,7 +21,6 @@
                 url: `/api/${id}`,
                 dataType: "JSON",
                 success: function(response){
-                    console.log(response.data);
                     $('#container').html("");
                     if(response.data.length != 0){
                         $('#container').append(
@@ -30,7 +29,7 @@
                                 <h4 class="mb-4">Weight:'+response.data.weight+'</h4>\
                                 <h4 class="mb-4">Height:'+response.data.height+'</h4>\
                                 <div class="d-flex justify-content-center">\
-                                    <a href="/api/admin/'+id+'/edit" class="btn btn-primary me-3">Edit</a></button>\
+                                    <a href="/admin/api/'+id+'/edit" class="btn btn-primary me-3">Edit</a></button>\
                                     <button id="delete" class="btn btn-danger" fs-4>\
                                         Delete</button></div>'
                         )

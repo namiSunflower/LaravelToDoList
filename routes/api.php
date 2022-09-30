@@ -23,9 +23,7 @@ Route::get('/',[UserChartController::class, 'api'])->name('api');
 Route::get('/{user}', [UserChartController::class, 'api_show'])->name('api_show');
 
 // 'middleware' => ['auth:admin']]
-Route::group(['prefix' => 'admin'], function () {
-    Route::get('/create', [UserChartController::class, 'create'])->name('create');
-    Route::get('/{user}/edit', [UserChartController::class, 'edit'])->name('edit');
+Route::group(['prefix' => 'admin'], function () {;
     Route::post('/', [UserChartController::class, 'store'])->name('store');
     Route::put('/{user}', [UserChartController::class, 'update'])->name('update');
     Route::delete('/{user}', [UserChartController::class, 'destroy'])->name('destroy');
