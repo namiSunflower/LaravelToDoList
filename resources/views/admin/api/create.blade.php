@@ -77,7 +77,7 @@
                 data: form,
                 dataType: 'JSON',
                 success: function(response){
-                    window.location.href = '/api'
+                    window.location.href = '/admin/api'
                 },
                 error: function(response){
                     //remove red border and error message if input is valid
