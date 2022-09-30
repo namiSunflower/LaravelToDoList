@@ -61,7 +61,7 @@ Route::group(['middleware' => ['auth:admin']], function(){
 //API Admin View without auth
 Route::group(['prefix' => 'api'], function () {
     Route::get('/',[UserChartController::class, 'index'])->name('index');
-    Route::get('/{user}', [UserChartController::class, 'show'])->name('show');
     Route::get('/create', [UserChartController::class, 'create'])->name('create');
+    Route::get('/{user}', [UserChartController::class, 'show'])->name('show');
     Route::get('/{user}/edit', [UserChartController::class, 'edit'])->name('edit');
 });
