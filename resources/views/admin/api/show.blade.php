@@ -30,8 +30,9 @@
                                 <h4 class="mb-4">Height:'+response.data.height+'</h4>\
                                 <div class="d-flex justify-content-center">\
                                     <a href="/admin/api/'+id+'/edit" class="btn btn-primary me-3">Edit</a></button>\
-                                    <button id="delete" class="btn btn-danger" fs-4>\
-                                        Delete</button></div>'
+                                    <button id="delete" class="btn btn-danger" fs-4>Delete</button>\
+                                </div>\
+                            </div>'
                         )
                     }      
                     $('#delete').on('click', function(e){
@@ -48,7 +49,7 @@
                         })
                     })
                 }
-            })}
             })
-        
+        }
+    })       
 </script>   

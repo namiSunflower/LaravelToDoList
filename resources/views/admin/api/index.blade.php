@@ -12,7 +12,6 @@
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
-
     $(document).ready(function(){
         $.ajaxSetup({
                 headers: {
@@ -40,12 +39,14 @@
                     if(response.data.length != 0){
                         $.each(response.data, function(key, user){
                             $('#container').append(
-                                '<div class="p-3 border border-success text-center"><h3>'+user.name+'</h3>\
-                                    <a href="/admin/api/'+user.id+'" class="btn btn-secondary mt-3">View</a></div>'
-                            )}
-                        )
+                                '<div class="p-3 border border-success text-center">\
+                                    <h3>'+user.name+'</h3>\
+                                    <a href="/admin/api/'+user.id+'" class="btn btn-secondary mt-3">View</a>\
+                                </div>'
+                            )
+                        })
                         if(response.meta.links.length >= 1){
-                            max_pages = response.meta.links.length - 2;
+                        max_pages = response.meta.links.length - 2;
                             if(response.meta.last_page <= 1){
                                 $("#next").attr("disabled", true);
                             }
@@ -54,18 +55,17 @@
                     else{
                         $("#prev").attr("disabled", true);
                         $("#next").attr("disabled", true);
-                        $('#container').append(
-                            '<p>No content to show</p>'
-                        )
+                        $('#container').append('<p>No content to show</p>')
                     }
                 }
-                })}
+            })
+        }
 
         $("#next, #prev").on('click', (function(e){
             e.preventDefault();
             let pageNumber = $("#next").data();
             ($(this).attr("id") == "next") ? incrementPage() : decrementPage();
-                getData(pageNumber.page);
+            getData(pageNumber.page);
 
             if(pageNumber.page < max_pages && pageNumber.page <= 1){
                 $("#prev").attr("disabled", true);
@@ -82,17 +82,16 @@
         }));
 
     incrementPage = () => {
-        $(".button").each(function() {
+        $(".button").each(function(){
             $(this).data()['page']++;
         });
     }
 
     decrementPage = () => {
-        $(".button").each(function() {
+        $(".button").each(function(){
             $(this).data()['page']--;
         });
-    }
-    })
+    }})
 </script>
 
 

@@ -7,10 +7,10 @@
     let id= {{ $user->id }}
     $(document).ready(function(){
         $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
         getData();
 
@@ -33,37 +33,37 @@
                                 <div id="success" class="text-success"></div>\
                                 <div class="text-center"><input type="submit" class="btn btn-success fs-4"></div>\
                             </form>'
-                                )
+                        )
+                    }
+                    $('#ajax-form').on('submit', function(e){
+                        e.preventDefault();
+                        const form = $(this).serialize();
+                        const url = $(this).attr('action');
+                        $.ajax({
+                            type: 'PUT',
+                            url: `/api/admin/${id}`,
+                            data: form,
+                            dataType: 'JSON',
+                            success: function(response){
+                                $('#success').fadeIn().html("Successfully updated user info!");
+                            },
+                            error: function(response){
+                                //remove red border and error message if input is valid
+                                $('[data-ajax-input]').removeClass('is-invalid');
+                                $('[data-ajax-feedback]').html('').removeClass('d-block');
+                                
+                                if(response.responseJSON.hasOwnProperty('errors')){
+                                    $.each(response.responseJSON.errors, function(key, value){
+                                        $('[data-ajax-input="' + key + '"]').addClass('is-invalid');
+                                        $('[data-ajax-feedback="' + key + '"]').html(value[0]).addClass('d-block');
+                                    })
+                                }
                             }
-                            $('#ajax-form').on('submit', function(e){
-                                e.preventDefault();
-                                const form = $(this).serialize();
-                                const url = $(this).attr('action');
-                                $.ajax({
-                                    type: 'PUT',
-                                    url: `/api/admin/${id}`,
-                                    data: form,
-                                    dataType: 'JSON',
-                                    success: function(response){
-                                        //change to 
-                                        $('#success').fadeIn().html("Successfully updated user info!");
-                                    },
-                                    error: function(response){
-                                        //remove red border and error message if input is valid
-                                        $('[data-ajax-input]').removeClass('is-invalid');
-                                        $('[data-ajax-feedback]').html('').removeClass('d-block');
-
-                                        if(response.responseJSON.hasOwnProperty('errors')){
-                                            $.each(response.responseJSON.errors, function(key, value){
-                                                $('[data-ajax-input="' + key + '"]').addClass('is-invalid');
-                                                $('[data-ajax-feedback="' + key + '"]').html(value[0]).addClass('d-block');
-                                            })
-                                        }
-                                    }
-                                })
-                            });
-                        }
-                    })}
+                        })
                     });
+                }
+            })
+        }
+    });
 </script>    
 

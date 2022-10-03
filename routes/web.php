@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TasksController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,15 +19,15 @@ Route::get('/', function () {
 
 
 Route::group(['prefix' => '/tasks', 'as' => 'tasks.', 'middleware' => 'auth'], function () {
-    Route::get('/', [TasksController::class, 'index'])->name('index');
-    Route::get('/create', [TasksController::class, 'create'])->name('create');
-    Route::get('/{task}', [TasksController::class, 'show'])->name('show');
-    Route::get('/{task}/edit', [TasksController::class, 'edit'])->name('edit');
-    Route::post('/', [TasksController::class, 'store'])->name('store');
-    Route::put('/{task}', [TasksController::class, 'update'])->name('update');
-    Route::delete('/{task}', [TasksController::class, 'destroy'])->name('destroy');
+    Route::get('/', 'TasksController@index')->name('index');
+    Route::get('/create', 'TasksController@create')->name('create');
+    Route::get('/{task}', 'TasksController@show')->name('show');
+    Route::get('/{task}/edit', 'TasksController@edit')->name('edit');
+    Route::post('/', 'TasksController@store')->name('store');
+    Route::put('/{task}', 'TasksController@update')->name('update');
+    Route::delete('/{task}', 'TasksController@destroy')->name('destroy');
 });
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 

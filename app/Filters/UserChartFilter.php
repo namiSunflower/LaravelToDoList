@@ -10,7 +10,6 @@ class UserChartFilter{
         'height' => ['eq', 'gt', 'lt', 'gte', 'lte'],
     ];
 
-    //change this?
     protected $operatorMap =[
         'eq' => '=',
         'lt' => '<',

@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\API\UserChartController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,13 +18,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/',[UserChartController::class, 'api'])->name('api');
-Route::get('/{user}', [UserChartController::class, 'api_show'])->name('api_show');
+Route::get('/','API\UserChartController@api')->name('api');
+Route::get('/{user}', 'API\UserChartController@api_show')->name('api_show');
 
-// 'middleware' => ['auth:admin']]
 Route::group(['prefix' => 'admin'], function () {;
-    Route::post('/', [UserChartController::class, 'store'])->name('store');
-    Route::put('/{user}', [UserChartController::class, 'update'])->name('update');
-    Route::delete('/{user}', [UserChartController::class, 'destroy'])->name('destroy');
+    Route::post('/', 'API\UserChartController@store')->name('store');
+    Route::put('/{user}', 'API\UserChartController@update')->name('update');
+    Route::delete('/{user}', 'API\UserChartController@destroy')->name('destroy');
 });
 

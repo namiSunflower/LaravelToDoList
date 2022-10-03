@@ -1,12 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\Auth\LoginController;
-use App\Http\Controllers\UsersController;
-use App\Http\Controllers\Admin\Auth\RegisterController;
-use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
-use App\Http\Controllers\Admin\Auth\ResetPasswordController;
-use App\Http\Controllers\API\UserChartController;
 
 
 /* 
@@ -22,8 +16,8 @@ use App\Http\Controllers\API\UserChartController;
 
 
 //API Admin View without auth
-Route::get('/',[UserChartController::class, 'index'])->name('index');
-Route::get('/create', [UserChartController::class, 'create'])->name('create');
-Route::get('/{user}', [UserChartController::class, 'show'])->name('show');
-Route::get('/{user}/edit', [UserChartController::class, 'edit'])->name('edit');
+Route::get('/','API\UserChartController@index')->name('index');
+Route::get('/create', 'API\UserChartController@create')->name('create');
+Route::get('/{user}', 'API\UserChartController@show')->name('show');
+Route::get('/{user}/edit', 'API\UserChartController@edit')->name('edit');
 

@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Admin\Auth;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class LoginController extends Controller
 {

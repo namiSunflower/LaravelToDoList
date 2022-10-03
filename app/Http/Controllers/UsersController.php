@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\models\User;
 use App\Http\Requests\UserUpdateRequest;
-use Illuminate\Support\Facades\Session;
 
 class UsersController extends Controller
 {
