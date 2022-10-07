@@ -1,0 +1,27 @@
+[
+    {
+        "name": "Burger",
+        "pet-type": "box turtle",
+        "age": "4 years old"
+    },
+    {
+        "name": "Bilbo",
+        "pet-type": "Himalayan cat",
+        "age": "9 years old"
+    },
+    {
+        "name": "Hamho",
+        "pet-type": "shih-tzu",
+        "age": "10 years old"
+    },
+    {
+        "name": "Chuckie",
+        "pet-type": "Siberian husky",
+        "age": "4 years old"
+    },
+    {
+        "name": "C1",
+        "pet-type": "Persian cat",
+        "age": "2 years old"
+    }
+]

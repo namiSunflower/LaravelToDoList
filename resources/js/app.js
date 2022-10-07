@@ -16,8 +16,13 @@ import { createApp } from 'vue';
 const app = createApp({});
 
 import ExampleComponent from './components/ExampleComponent.vue';
+import UserBirthdayEditComponent from './components/pages/UserBirthdayEditComponent.vue';
+import UserBirthdayIndexComponent from './components/pages/UserBirthdayIndexComponent.vue';
+import UserBirthdayShowComponent from './components/pages/UserBirthdayShowComponent.vue';
 app.component('example-component', ExampleComponent);
-
+app.component('user-birthday-edit-component', UserBirthdayEditComponent);
+app.component('user-birthday-index-component', UserBirthdayIndexComponent);
+app.component('user-birthday-show-component', UserBirthdayShowComponent);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

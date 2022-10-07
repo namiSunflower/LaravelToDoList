@@ -33,15 +33,14 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
-
     @include('inc.navbar')
     <main class="container mt-4">
         @yield('content')
     </main>
 
     <script src="{{asset('js/app.js')}}"></script>
-    
-    {{-- Success Alert --}}
+        
+        {{-- Success Alert --}}
     @if(session('status'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{session('status')}}
@@ -61,16 +60,16 @@
         </div>
     @endif
 
-    <script>
-        //close the alert after 3 seconds.
-        $(document).ready(function(){
-	    setTimeout(function() {
-	        $(".alert").alert('close');
-	    }, 3000);
-    	});
-    </script>
+    </div>
+        {{-- <script>
+            //close the alert after 3 seconds.
+            $(document).ready(function(){
+            setTimeout(function() {
+                $(".alert").alert('close');
+            }, 3000);
+            });
+        </script> --}}
     {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script> --}}
 
-    
 </body>
 </html>

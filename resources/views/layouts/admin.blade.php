@@ -33,34 +33,35 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
+    <div id="app">
+        @include('inc.admin_navbar')
+        <main class="container mt-4">
+            @yield('content')
+        </main>
 
-    @include('inc.admin_navbar')
-    <main class="container mt-4">
-        @yield('content')
-    </main>
+        <script src="{{asset('js/app.js')}}"></script>
+        
+        
+        {{-- Success Alert --}}
+        @if(session('status'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{session('status')}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
 
-    <script src="{{asset('js/app.js')}}"></script>
-    
-    
-    {{-- Success Alert --}}
-    @if(session('status'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{session('status')}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-
-    {{-- Error Alert --}}
-    @if(session('error'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{session('error')}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
+        {{-- Error Alert --}}
+        @if(session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{session('error')}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+    </div>
 
     <script>
         //close the alert after 3 seconds.

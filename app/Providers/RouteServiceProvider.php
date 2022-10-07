@@ -39,9 +39,21 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/api/api.php'));
 
+            Route::middleware('api')
+                ->prefix('/axios-api')
+                ->name('axios-api.')
+                // app\Http\Controllers\API\UserChartController.php
+                ->namespace($this->namespace)
+                ->group(base_path('routes/api/axios-api.php'));
+
             Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
+            
+            Route::middleware('web')
+                ->prefix('/test')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/test.php'));
 
             Route::middleware('web')
                 ->prefix('/admin')
