@@ -4,7 +4,7 @@
         <div v-if="!birthdays.length"  v-for="birthday in birthdays" :key="birthday">
             <div v-for="b in birthday" class="border border-success p-3 mb-3 text-center" :key="b">
                 <h3>{{b.name}}</h3>
-                <a :href="`/axios-api/${b.id}/edit`">View</a>
+                <a :href="`/axios-api/${b.id}/`">View</a>
             </div>
         </div>
     </div>
@@ -23,12 +23,9 @@ import axios from 'axios'
             loadBirthdays(){
                 axios.get(`/axios-api`)
                 .then(response => {
-                //  console.log(response.data)
-                if(response.status == 200)
-                 this.birthdays = response.data;
-                 console.log(response.data)
+                    this.birthdays = response.data;
                 }).catch(err =>{
-                    console.log(err)
+                    alert(err)
                  });
             }
         },
@@ -37,7 +34,7 @@ import axios from 'axios'
         },
         headers: { 'content-type': 'application/x-www-form-urlencoded' },
         mounted() {
-            // console.log('test')
+            console.log('Successfully mounted')
         },
     }
 </script>
