@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,10 +19,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/','API\UserChartController@api')->name('api');
-Route::get('/{user}', 'API\UserChartController@api_show')->name('api_show');
 
-Route::group(['prefix' => 'admin'], function () {;
+Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin']], function () {
+    Auth::routes();
+    Route::get('/','API\UserChartController@api')->name('api');
+    Route::get('/{user}', 'API\UserChartController@api_show')->name('api_show');
     Route::post('/', 'API\UserChartController@store')->name('store');
     Route::put('/{user}', 'API\UserChartController@update')->name('update');
     Route::delete('/{user}', 'API\UserChartController@destroy')->name('destroy');
