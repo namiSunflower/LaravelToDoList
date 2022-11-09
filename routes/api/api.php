@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth:api']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth:admin']], function () {
     Route::get('/','API\UserChartController@api')->name('api');
     Route::get('/{user}', 'API\UserChartController@api_show')->name('api_show');
     Route::post('/', 'API\UserChartController@store')->name('store');

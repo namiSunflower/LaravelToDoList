@@ -37,7 +37,7 @@ Route::get('/password/reset{token}','Admin\Auth\ResetPasswordController@showRese
 Route::post('/password/reset{token}','Admin\Auth\ResetPasswordController@reset')->name('password.update');
 
 //Admin Task CRUD
-Route::group(['middleware' => ['auth:admin, auth:api']], function(){
+Route::group(['middleware' => ['auth:admin']], function(){
     Route::get('/home','UsersController@dashboard')->name('home');   
     Route::prefix('user')->group(function () {
         Route::get('/index','UsersController@index')->name('index');

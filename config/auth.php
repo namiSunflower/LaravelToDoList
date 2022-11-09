@@ -47,7 +47,7 @@ return [
         ],
         'api' => [
             'driver' => 'token',
-            'provider' => 'admins',
+            'provider' => 'users',
             'hash' => false,
         ],
         'admin' => [
